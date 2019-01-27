@@ -1,6 +1,6 @@
 # watchtips
 
-This is an experiment to see if  can use Flutter to build an iOS app with an accompanying watchOS app. My first attempts using the beta prpduct were not successful so the idea was parked.
+This is an experiment to see if  can use Flutter to build an iOS app with an accompanying watchOS app. My first attempts using the beta product were not successful so the idea was parked.
 Having now re-visited this I can now get a compiled blank watch app up and running with a Flutter app, so I will, in stages, try and re-create the WatchTips app using Flutter.
 
 My plan is to:
@@ -12,6 +12,7 @@ My plan is to:
 - *1.4* See if I can bridge between the 2 app (as the Titanium version does)
 
 
+[Titanium version is here](https://github.com/magnatronus/Watch-Tips)
 
 ## Getting Started
 
