@@ -14,6 +14,10 @@ My plan is to:
 
 ## Versions
 
+
+### 1.2
+Updated Watch app and added functioning WatchTips. Watch app can now be used to calculate Bill split and tips.
+
 ### 1.1
 After using XCode to define a simulator with an attached Watch Emulator the standard Vanilla app (from 1.0) was updated as follows
 

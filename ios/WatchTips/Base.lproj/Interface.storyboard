@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="14460.31" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
-    <device id="watch38" orientation="portrait">
+    <device id="watch42" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -14,11 +14,240 @@
             <objects>
                 <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="WatchTips" customModuleProvider="target">
                     <items>
-                        <button width="1" alignment="left" title="WatchTips" id="Hdl-vm-BZL"/>
-                        <switch width="1" alignment="left" value="YES" title="Switch" id="agC-8U-N2Q"/>
+                        <label width="1" alignment="left" text="Tip Calculator" textAlignment="center" id="S8s-os-MB4">
+                            <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </label>
+                        <group width="1" alignment="left" layout="vertical" id="jv7-Km-dCz">
+                            <items>
+                                <group width="1" alignment="left" id="B1w-o7-qtw">
+                                    <items>
+                                        <button width="0.5" alignment="left" title="10%" id="bHJ-Qw-WUr" userLabel="Current Tip">
+                                            <connections>
+                                                <action selector="showTipController" destination="AgC-eL-Hgc" id="1Ob-fP-aCa"/>
+                                            </connections>
+                                        </button>
+                                        <button width="0.5" alignment="left" title="1" id="X9G-hL-mdH" userLabel="Current Split">
+                                            <connections>
+                                                <action selector="showSplitController" destination="AgC-eL-Hgc" id="ck2-J5-5iS"/>
+                                            </connections>
+                                        </button>
+                                    </items>
+                                </group>
+                                <group width="1" alignment="left" id="4J9-IW-RgX">
+                                    <items>
+                                        <label width="0.5" alignment="left" text="Tip" textAlignment="center" id="8et-In-TsJ" userLabel="Tip">
+                                            <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </label>
+                                        <label width="0.5" alignment="left" text="Split" textAlignment="center" id="y72-cj-H2I" userLabel="Split">
+                                            <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </label>
+                                    </items>
+                                </group>
+                                <group width="1" alignment="left" id="WW5-gj-be7">
+                                    <items>
+                                        <button width="0.59999999999999998" alignment="left" title="Bill" id="k7i-us-zKW" userLabel="Bill Button">
+                                            <connections>
+                                                <action selector="showBillController" destination="AgC-eL-Hgc" id="I4S-vg-nil"/>
+                                            </connections>
+                                        </button>
+                                        <label width="0.40000000000000002" alignment="left" verticalAlignment="center" text="0.00" textAlignment="right" id="5L4-HJ-w7q" userLabel="Current Total">
+                                            <color key="textColor" red="1" green="0.83234566450000003" blue="0.47320586440000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </label>
+                                    </items>
+                                </group>
+                            </items>
+                        </group>
+                        <group width="1" alignment="left" id="I05-E2-Zyd">
+                            <items>
+                                <label width="0.59999999999999998" alignment="left" text="With Tip" id="JNc-KF-kvB" userLabel="Tip Label"/>
+                                <label width="0.40000000000000002" alignment="left" text="0.00" textAlignment="right" id="BeF-QQ-rIe" userLabel="With Tip">
+                                    <color key="textColor" red="1" green="0.83234566450000003" blue="0.47320586440000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </label>
+                            </items>
+                        </group>
+                        <group width="1" alignment="left" id="iRo-tq-qYi">
+                            <items>
+                                <label width="0.59999999999999998" alignment="left" text="Cost each" id="bBf-xZ-gRf" userLabel="Cost Label"/>
+                                <label width="0.40000000000000002" alignment="left" text="0.00" textAlignment="right" id="plO-pV-RvV" userLabel="Cost Each">
+                                    <color key="textColor" red="1" green="0.83234566450000003" blue="0.47320586440000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </label>
+                            </items>
+                        </group>
                     </items>
+                    <connections>
+                        <outlet property="billButton" destination="k7i-us-zKW" id="ggH-gO-4bj"/>
+                        <outlet property="costEach" destination="plO-pV-RvV" id="WJ0-eK-xex"/>
+                        <outlet property="currentSplit" destination="X9G-hL-mdH" id="aiz-ne-g1a"/>
+                        <outlet property="currentTip" destination="bHJ-Qw-WUr" id="u10-Ng-Ou5"/>
+                        <outlet property="currentTotal" destination="5L4-HJ-w7q" id="7d5-Dg-hdW"/>
+                        <outlet property="withTip" destination="BeF-QQ-rIe" id="BFS-YS-tG2"/>
+                    </connections>
                 </controller>
             </objects>
+        </scene>
+        <!--Close-->
+        <scene sceneID="Ohw-eY-cZY">
+            <objects>
+                <controller identifier="TipController" title="Close" id="15v-64-UEb" customClass="TipController" customModule="WatchTips_Extension">
+                    <items>
+                        <group width="1" alignment="center" verticalAlignment="center" layout="vertical" id="TT2-pX-haC">
+                            <items>
+                                <button width="1" alignment="left" title="+" id="KZ1-Sq-FN7">
+                                    <color key="titleColor" red="0.0" green="0.56284224989999998" blue="0.31881666180000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <fontDescription key="font" type="system" pointSize="25"/>
+                                    <connections>
+                                        <action selector="increaseTip" destination="15v-64-UEb" id="6bF-lh-tfP"/>
+                                    </connections>
+                                </button>
+                                <label width="1" alignment="left" text="10%" textAlignment="center" id="9NM-QG-I3g" userLabel="Tip Percent">
+                                    <color key="textColor" red="1" green="0.83234566450000003" blue="0.47320586440000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <fontDescription key="font" type="system" pointSize="44"/>
+                                </label>
+                                <button width="1" alignment="left" title="-" id="MjL-A8-cjM">
+                                    <color key="titleColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <fontDescription key="font" type="system" pointSize="25"/>
+                                    <connections>
+                                        <action selector="decreaseTip" destination="15v-64-UEb" id="X1D-VN-Net"/>
+                                    </connections>
+                                </button>
+                            </items>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="tipPercent" destination="9NM-QG-I3g" id="ljL-hs-Vgl"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="390" y="7"/>
+        </scene>
+        <!--Close-->
+        <scene sceneID="Szr-Ss-uyz">
+            <objects>
+                <controller identifier="BillController" title="Close" id="LfT-dV-XDl" customClass="BillController" customModule="WatchTips_Extension">
+                    <items>
+                        <group width="1" alignment="left" id="Wfs-NE-8zz">
+                            <items>
+                                <label width="1" alignment="left" text="0.00" textAlignment="right" id="ywf-ca-1Dk">
+                                    <color key="textColor" red="1" green="0.83234566450000003" blue="0.47320586440000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <fontDescription key="font" type="system" pointSize="26"/>
+                                </label>
+                            </items>
+                        </group>
+                        <group width="1" alignment="left" id="6eS-Qg-LAS">
+                            <items>
+                                <button width="0.25" alignment="left" title="6" id="npG-JF-39t">
+                                    <connections>
+                                        <action selector="sixBtn" destination="LfT-dV-XDl" id="vkl-AL-u7y"/>
+                                    </connections>
+                                </button>
+                                <button width="0.25" alignment="left" title="7" id="ZxL-Hp-YZ4">
+                                    <connections>
+                                        <action selector="sevenBtn" destination="LfT-dV-XDl" id="2MG-Sz-Wrs"/>
+                                    </connections>
+                                </button>
+                                <button width="0.25" alignment="left" title="8" id="2Q5-4s-dlh">
+                                    <connections>
+                                        <action selector="eightBtn" destination="LfT-dV-XDl" id="MbY-dT-oLH"/>
+                                    </connections>
+                                </button>
+                                <button width="0.25" alignment="left" title="9" id="ZaG-IV-JbO">
+                                    <connections>
+                                        <action selector="nineBtn" destination="LfT-dV-XDl" id="zAE-Gv-t6l"/>
+                                    </connections>
+                                </button>
+                            </items>
+                        </group>
+                        <group width="1" alignment="left" id="oA1-yL-80J">
+                            <items>
+                                <button width="0.25" alignment="left" title="2" id="tso-Zy-8XF">
+                                    <connections>
+                                        <action selector="twoBtn" destination="LfT-dV-XDl" id="ASu-8n-Pqn"/>
+                                    </connections>
+                                </button>
+                                <button width="0.25" alignment="left" title="3" id="KQV-A8-Xhw">
+                                    <connections>
+                                        <action selector="threeBtn" destination="LfT-dV-XDl" id="8Ah-4O-4Qg"/>
+                                    </connections>
+                                </button>
+                                <button width="0.25" alignment="left" title="4" id="qyi-0l-JQ3">
+                                    <connections>
+                                        <action selector="fourBtn" destination="LfT-dV-XDl" id="cnd-Oz-0wm"/>
+                                    </connections>
+                                </button>
+                                <button width="0.25" alignment="left" title="5" id="ojv-2P-vtQ">
+                                    <connections>
+                                        <action selector="fiveBtn" destination="LfT-dV-XDl" id="vja-KC-B8H"/>
+                                    </connections>
+                                </button>
+                            </items>
+                        </group>
+                        <group width="1" alignment="left" id="9G0-uK-WB4">
+                            <items>
+                                <button width="0.25" alignment="left" title="C" id="edZ-mB-0bi">
+                                    <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <connections>
+                                        <action selector="clearBtn" destination="LfT-dV-XDl" id="IMo-gh-rjL"/>
+                                    </connections>
+                                </button>
+                                <button width="0.25" alignment="left" title="." id="9yQ-An-hhT">
+                                    <connections>
+                                        <action selector="decimalBtn" destination="LfT-dV-XDl" id="hLt-Va-lYy"/>
+                                    </connections>
+                                </button>
+                                <button width="0.25" alignment="left" title="0" id="Dff-T5-nM1">
+                                    <connections>
+                                        <action selector="zeroBtn" destination="LfT-dV-XDl" id="8IM-NF-X1X"/>
+                                    </connections>
+                                </button>
+                                <button width="0.25" alignment="left" title="1" id="waP-ua-tHC">
+                                    <connections>
+                                        <action selector="oneBtn" destination="LfT-dV-XDl" id="1hh-XY-g72"/>
+                                    </connections>
+                                </button>
+                            </items>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="totalAmount" destination="ywf-ca-1Dk" id="pBE-cS-MLR"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="685" y="7"/>
+        </scene>
+        <!--Close-->
+        <scene sceneID="6qr-4c-m7S">
+            <objects>
+                <controller identifier="SplitController" title="Close" id="ecs-km-yZs" customClass="SplitController" customModule="WatchTips_Extension">
+                    <items>
+                        <group width="1" alignment="center" verticalAlignment="center" layout="vertical" id="xpy-FV-8rd">
+                            <items>
+                                <button width="1" alignment="left" title="+" id="ol3-2w-ObH">
+                                    <color key="titleColor" red="0.0" green="0.56284224989999998" blue="0.31881666180000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <fontDescription key="font" type="system" pointSize="25"/>
+                                    <connections>
+                                        <action selector="increaseSplit" destination="ecs-km-yZs" id="Tex-z6-VEk"/>
+                                    </connections>
+                                </button>
+                                <label width="1" alignment="left" text="1" textAlignment="center" id="lGm-Se-3fa" userLabel="Split Breakdown">
+                                    <color key="textColor" red="1" green="0.83234566450000003" blue="0.47320586440000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <fontDescription key="font" type="system" pointSize="44"/>
+                                </label>
+                                <button width="1" alignment="left" title="-" id="Dnb-gG-Zby">
+                                    <color key="titleColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <fontDescription key="font" type="system" pointSize="25"/>
+                                    <connections>
+                                        <action selector="decreaseSplit" destination="ecs-km-yZs" id="3oZ-oT-MXa"/>
+                                    </connections>
+                                </button>
+                            </items>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="splitBetween" destination="lGm-Se-3fa" id="Bzp-gy-ES2"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="390" y="291"/>
         </scene>
     </scenes>
 </document>
