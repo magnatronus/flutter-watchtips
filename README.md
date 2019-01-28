@@ -16,7 +16,7 @@ My plan is to:
 
 ## Versions
 
-### 1.23
+### 1.3
 So after a bit of a hair pulling out session I have managed to get this working. I now have a iWatch app as well as a Flutter iOS app to build and run. I have tested this by building and distribuing to a physical phone via HockeyApp. Now the bad news......
 
 I cannot use Flutter to either build the Flutter project or do the iOS release build, so I actually built the Flutter app in a seperate project then added the lib dir back into this one.
