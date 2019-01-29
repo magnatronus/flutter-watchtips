@@ -11,10 +11,21 @@ My plan is to:
 - *1.1* Add a blank watch project and get it working
 - *1.2* Modify the watch app functionally into WatchTips
 - *1.3* Update the Flutter app to WatchTips
-- *1.4* **See if I can bridge between the 2 app (as the Titanium version does)**
-
+- *1.4* See if I can bridge between the 2 app (as the Titanium version does)
+- **1.5 Tidy up both the Flutter code and the iOS project and use it to submit the app into the App Store**
 
 ## Versions
+
+### 1.4 - Rough and Ready but Working!
+I have now managed to add the required code into the iOS project to allow it to communicate with Flutter and send data updates from the watch so they are reflected in the app.
+Basically if you do a calculation for a Tip on the watch then the data is transferred to the associated device.
+
+You need to forgive the (bad?) Objective C coding as it is not really my thing  - who in their right mind thought of it in the first place anyway :-) . A lot of this was just brute force trial and error as well as a lot of searching and testing. 
+
+Apart from that the difficult issue for me was that although **MethodChannel** is quite well documented, **EventChannel** is not, the only examples I found were to do with Plugin extensions, but again probably due to my dislike (due to not understanding it very well) of Objective C.
+
+I will try to create a generic plug-in later, but that will be done in Swift.
+
 
 ### 1.3
 So after a bit of a hair pulling out session I have managed to get this working. I now have a iWatch app as well as a Flutter iOS app to build and run. I have tested this by building and distribuing to a physical phone via HockeyApp. Now the bad news......

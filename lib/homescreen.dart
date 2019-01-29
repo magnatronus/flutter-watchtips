@@ -1,4 +1,6 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -8,12 +10,35 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
 
+  static const platform = const MethodChannel('uk.spiralarm.watchtips/tipinfo');
+  static const stream = const EventChannel('uk.spiralarm.watchtips/tipinfo/watchdata');
+  StreamSubscription tipSubscription;
+
   final formatter = new NumberFormat("##0.00");
   TextEditingController billTotalController = TextEditingController(text: "0.00");
   int tipPercent = 10, tipSplit = 1;
   double billTotal = 0.0;
   double totalWithTip = 0.0;
   double totalEach = 0.0;
+  String buttonName = "Activate";
+
+
+  @override
+  void initState() {
+    super.initState();
+    activateWatchConnection();
+  }
+
+
+  @override
+  void dispose() {
+    if(tipSubscription!=null){
+      tipSubscription.cancel();
+      tipSubscription = null;
+    }
+    super.dispose();
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -159,9 +184,31 @@ class _HomeScreenState extends State<HomeScreen> {
     total = (total ?? billTotal);
     setState(() {
       billTotal = total;
+      billTotalController.text = "${formatter.format(billTotal)}";
       double tip = (total/100) * tipPercent;
       totalWithTip = total +tip;
       totalEach = (totalWithTip/tipSplit);
     });
   }
+
+  /// Active and start the connection to the Watch App
+  activateWatchConnection() async {
+
+    // Start initial Session to allow watch an iOS to swap user data
+    await platform.invokeMethod("activateSession");
+
+    // Connect up our stream so we can monitor for watch updates
+    stream.receiveBroadcastStream().listen((value){
+      List result = value;
+      debugPrint("${result[0]}");
+      if(result[0]!=null){
+          tipPercent = int.tryParse(result[0]['tip']); 
+          tipSplit = int.tryParse(result[0]['split']);
+          billTotal = double.tryParse(result[0]['bill']);  
+          calculateBill(null);
+        }
+    });
+
+  }
+
 }
