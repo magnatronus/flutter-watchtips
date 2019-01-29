@@ -12,7 +12,28 @@ My plan is to:
 - *1.2* Modify the watch app functionally into WatchTips
 - *1.3* Update the Flutter app to WatchTips
 - *1.4* See if I can bridge between the 2 app (as the Titanium version does)
-- **1.5 Tidy up both the Flutter code and the iOS project and use it to submit the app into the App Store**
+- *2.0* Tidy up both the Flutter code and the iOS project and use it to submit the app into the App Store
+
+
+## Generating a Distro build
+The only way, so far, I have found of creating a distro build is following this seqence.
+
+### Set the Bundle ID
+BEFORE adding the Watchit app target set the final bundle ID, as the Watch app need to use the same prefix. If not you may need to update all references BEFORE creating the final Archive.
+
+### Change ALL the Version and Build values
+This MUST for each target (in this case 3) to **$(FLUTTER_BUILD_NAME)**  and **$(FLUTTER_BUILD_NUMBER)** respectively, otherwise although the test runs work, the Archive will not unless the version numbers match.
+
+### Run the Flutter build first
+This will fail, but it generates the *correct shell scripts* to enable iOS to carry out the build (*flutter build ios --release*).
+
+### Create Archive in XCode
+- 1 Select Generic Device + watchOS Device as the destination
+- 2 Run Product -> Archive
+- 3 If build successful , run the Validate App
+- 4 If validate successful - upload to App Store!!!
+
+
 
 ## Versions
 

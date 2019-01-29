@@ -533,8 +533,9 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flutter",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = uk.spiralarm.watchtips;
+				PRODUCT_BUNDLE_IDENTIFIER = uk.spiralarm.tipcalculator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Profile;
@@ -557,7 +558,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = uk.spiralarm.watchtips.watchkitapp.watchkitextension;
+				PRODUCT_BUNDLE_IDENTIFIER = uk.spiralarm.tipcalculator.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -586,7 +587,7 @@
 				INFOPLIST_FILE = "WatchTips Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = uk.spiralarm.watchtips.watchkitapp.watchkitextension;
+				PRODUCT_BUNDLE_IDENTIFIER = uk.spiralarm.tipcalculator.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -614,7 +615,7 @@
 				INFOPLIST_FILE = "WatchTips Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = uk.spiralarm.watchtips.watchkitapp.watchkitextension;
+				PRODUCT_BUNDLE_IDENTIFIER = uk.spiralarm.tipcalculator.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -644,7 +645,7 @@
 				INFOPLIST_FILE = WatchTips/Info.plist;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = uk.spiralarm.watchtips.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = uk.spiralarm.tipcalculator.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -674,7 +675,7 @@
 				IBSC_MODULE = WatchTips_Extension;
 				INFOPLIST_FILE = WatchTips/Info.plist;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = uk.spiralarm.watchtips.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = uk.spiralarm.tipcalculator.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -703,7 +704,7 @@
 				IBSC_MODULE = WatchTips_Extension;
 				INFOPLIST_FILE = WatchTips/Info.plist;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = uk.spiralarm.watchtips.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = uk.spiralarm.tipcalculator.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -834,8 +835,9 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flutter",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = uk.spiralarm.watchtips;
+				PRODUCT_BUNDLE_IDENTIFIER = uk.spiralarm.tipcalculator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -858,8 +860,9 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flutter",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = uk.spiralarm.watchtips;
+				PRODUCT_BUNDLE_IDENTIFIER = uk.spiralarm.tipcalculator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;

@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>watchtips</string>
+	<string>watch tips</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -17,16 +17,16 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0.0</string>
+	<string>$(FLUTTER_BUILD_NAME)</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
 	<key>WKCompanionAppBundleIdentifier</key>
-	<string>uk.spiralarm.watchtips</string>
+	<string>uk.spiralarm.tipcalculator</string>
 	<key>WKWatchKitApp</key>
 	<true/>
 </dict>

@@ -9,19 +9,18 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
   static const platform = const MethodChannel('uk.spiralarm.watchtips/tipinfo');
-  static const stream = const EventChannel('uk.spiralarm.watchtips/tipinfo/watchdata');
+  static const stream =
+      const EventChannel('uk.spiralarm.watchtips/tipinfo/watchdata');
   StreamSubscription tipSubscription;
 
   final formatter = new NumberFormat("##0.00");
-  TextEditingController billTotalController = TextEditingController(text: "0.00");
+  TextEditingController billTotalController =
+      TextEditingController(text: "0.00");
   int tipPercent = 10, tipSplit = 1;
   double billTotal = 0.0;
   double totalWithTip = 0.0;
   double totalEach = 0.0;
-  String buttonName = "Activate";
-
 
   @override
   void initState() {
@@ -29,26 +28,21 @@ class _HomeScreenState extends State<HomeScreen> {
     activateWatchConnection();
   }
 
-
   @override
   void dispose() {
-    if(tipSubscription!=null){
+    if (tipSubscription != null) {
       tipSubscription.cancel();
       tipSubscription = null;
     }
     super.dispose();
   }
 
-
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-
       appBar: AppBar(
         title: Text("Tip Calculator"),
       ),
-
       body: Container(
         margin: EdgeInsets.all(30.0),
         padding: EdgeInsets.all(20.0),
@@ -56,123 +50,108 @@ class _HomeScreenState extends State<HomeScreen> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-
             TextField(
               controller: billTotalController,
               keyboardType: TextInputType.numberWithOptions(decimal: true),
               decoration: InputDecoration(
-                labelText: "Bill Total",
-                suffixIcon: IconButton(
-                  onPressed: (){
-                    calculateBill(double.tryParse(billTotalController.text));
-                  },
-                  icon: Icon(
-                    Icons.thumb_up,
-                    color: Theme.of(context).textTheme.body1.color,
+                  labelText: "Bill Total",
+                  suffixIcon: IconButton(
+                    onPressed: () {
+                      FocusScope.of(context).requestFocus(new FocusNode());
+                      calculateBill(double.tryParse(billTotalController.text));
+                    },
+                    icon: Icon(
+                      Icons.thumb_up,
+                      color: Theme.of(context).textTheme.body1.color,
+                    ),
+                  )),
+            ),
+            Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Text(
+                    "Tip Percentage",
+                    style: Theme.of(context).primaryTextTheme.title,
                   ),
-                )
-              ),
-            ),
-
-
+                  IconButton(
+                    onPressed: () {
+                      if (tipPercent > 0) {
+                        tipPercent--;
+                        calculateBill(null);
+                      }
+                    },
+                    icon: Icon(Icons.remove_circle_outline),
+                  ),
+                  Text(
+                    "$tipPercent%",
+                    style: Theme.of(context).textTheme.title,
+                    textAlign: TextAlign.center,
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      if (tipPercent < 50) {
+                        tipPercent++;
+                        calculateBill(null);
+                      }
+                    },
+                    icon: Icon(Icons.add_circle_outline),
+                  ),
+                ]),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Text(
-                  "Tip Percentage",
-                  style: Theme.of(context).primaryTextTheme.title,
-                ),
-                IconButton(
-                  onPressed: (){
-                    if(tipPercent>0){
-                      tipPercent--;
-                      calculateBill(null);
-                    }
-                  },
-                  icon: Icon(Icons.remove_circle_outline),
-                ),               
-                Text(
-                  "$tipPercent%",
-                  style: Theme.of(context).textTheme.title,
-                  textAlign: TextAlign.center,
-                ),
-                IconButton(
-                  onPressed: (){
-                    if(tipPercent<50){
-                      tipPercent++;
-                      calculateBill(null);
-                    }                    
-                  },
-                  icon: Icon(Icons.add_circle_outline),
-                ),                   
-              ]
-            ),
-
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Text(
+                    "Split Between",
+                    style: Theme.of(context).primaryTextTheme.title,
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      if (tipSplit > 1) {
+                        tipSplit--;
+                        calculateBill(null);
+                      }
+                    },
+                    icon: Icon(Icons.remove_circle_outline),
+                  ),
+                  Text(
+                    "$tipSplit",
+                    style: Theme.of(context).textTheme.title,
+                    textAlign: TextAlign.center,
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      if (tipSplit < 50) {
+                        tipSplit++;
+                        calculateBill(null);
+                      }
+                    },
+                    icon: Icon(Icons.add_circle_outline),
+                  ),
+                ]),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Text(
-                  "Split Between",
-                  style: Theme.of(context).primaryTextTheme.title,     
-                ),
-                IconButton(
-                  onPressed: (){
-                    if(tipSplit>1){
-                      tipSplit--;
-                      calculateBill(null);
-                    }
-                  },
-                  icon: Icon(Icons.remove_circle_outline),
-                ),               
-                Text(
-                  "$tipSplit",
-                  style: Theme.of(context).textTheme.title,
-                  textAlign: TextAlign.center,
-                ),
-                IconButton(
-                  onPressed: (){
-                    if(tipSplit<50){
-                      tipSplit++;
-                      calculateBill(null);
-                    }                    
-                  },
-                  icon: Icon(Icons.add_circle_outline),
-                ),                   
-              ]
-            ),
-
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Text(
+                    "Total with tip",
+                    style: Theme.of(context).primaryTextTheme.title,
+                  ),
+                  Text(
+                    "${formatter.format(totalWithTip)}",
+                    style: Theme.of(context).textTheme.title,
+                  ),
+                ]),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Text(
-                  "Total with tip",
-                  style: Theme.of(context).primaryTextTheme.title,
-
-                ),               
-                Text(
-                  "${formatter.format(totalWithTip)}",
-                  style: Theme.of(context).textTheme.title,
-
-                ),
-              ]
-            ),
-
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Text(
-                  "Total cost each",
-                  style: Theme.of(context).primaryTextTheme.title,
-                 
-                ),               
-                Text(
-                  "${formatter.format(totalEach)}",
-                  style: Theme.of(context).textTheme.title,
-                
-                ),
-              ]
-            ),
-
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Text(
+                    "Total cost each",
+                    style: Theme.of(context).primaryTextTheme.title,
+                  ),
+                  Text(
+                    "${formatter.format(totalEach)}",
+                    style: Theme.of(context).textTheme.title,
+                  ),
+                ]),
           ],
         ),
       ),
@@ -180,35 +159,31 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   /// Simple calculation of bill amounts
-  calculateBill(double total){
+  calculateBill(double total) {
     total = (total ?? billTotal);
     setState(() {
       billTotal = total;
       billTotalController.text = "${formatter.format(billTotal)}";
-      double tip = (total/100) * tipPercent;
-      totalWithTip = total +tip;
-      totalEach = (totalWithTip/tipSplit);
+      double tip = (total / 100) * tipPercent;
+      totalWithTip = total + tip;
+      totalEach = (totalWithTip / tipSplit);
     });
   }
 
   /// Active and start the connection to the Watch App
   activateWatchConnection() async {
-
-    // Start initial Session to allow watch an iOS to swap user data
+    // Start initial Session to allow watch and iOS to swap user data
     await platform.invokeMethod("activateSession");
 
     // Connect up our stream so we can monitor for watch updates
-    stream.receiveBroadcastStream().listen((value){
+    stream.receiveBroadcastStream().listen((value) {
       List result = value;
-      debugPrint("${result[0]}");
-      if(result[0]!=null){
-          tipPercent = int.tryParse(result[0]['tip']); 
-          tipSplit = int.tryParse(result[0]['split']);
-          billTotal = double.tryParse(result[0]['bill']);  
-          calculateBill(null);
-        }
+      if (result[0] != null) {
+        tipPercent = int.tryParse(result[0]['tip']);
+        tipSplit = int.tryParse(result[0]['split']);
+        billTotal = double.tryParse(result[0]['bill']);
+        calculateBill(null);
+      }
     });
-
   }
-
 }

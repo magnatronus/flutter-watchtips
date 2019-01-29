@@ -2,20 +2,18 @@ import 'package:flutter/material.dart';
 import 'homescreen.dart';
 import 'colors.dart';
 
-
 void main() => runApp(TipCalculator());
- 
+
 class TipCalculator extends StatelessWidget {
-
-   @override
-   Widget build(BuildContext context) {
-      return MaterialApp(
-         title: 'TipCalculator',
-         home: HomeScreen(),
-         theme: _buildAppTheme(),
-       );
-   }
-
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'TipCalculator',
+      home: HomeScreen(),
+      theme: _buildAppTheme(),
+    );
+  }
 
   /// Define a modified theme for the app
   ThemeData _buildAppTheme() {
@@ -33,22 +31,16 @@ class TipCalculator extends StatelessWidget {
         bodyColor: appPrimaryTextColor,
         displayColor: appPrimaryTextColor,
       ),
-      iconTheme: base.iconTheme.copyWith(
-        color: appPrimaryTextColor
-      ),
+      iconTheme: base.iconTheme.copyWith(color: appPrimaryTextColor),
       inputDecorationTheme: InputDecorationTheme(
-        labelStyle: TextStyle(
-          color: appTextColor,
-          fontSize: 25.0
-        ),
+        labelStyle: TextStyle(color: appTextColor, fontSize: 25.0),
         enabledBorder: const OutlineInputBorder(
           borderSide: const BorderSide(color: appPrimaryTextColor, width: 2.0),
         ),
         focusedBorder: const OutlineInputBorder(
           borderSide: const BorderSide(color: appPrimaryTextColor, width: 2.0),
-        ),       
+        ),
       ),
     );
   }
-
 }

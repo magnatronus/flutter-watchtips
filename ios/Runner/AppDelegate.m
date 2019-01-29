@@ -8,7 +8,7 @@ FlutterEventSink sink;
 NSDictionary *info;
 
 - (void) updateUserInfo:(nonnull NSDictionary<NSString *, id> *)userInfo{
-    NSLog(@"Update Recieved");
+    //NSLog(@"Update Recieved");
     if(info != userInfo){
         info = userInfo;
         if(sink!=nil){
@@ -18,13 +18,13 @@ NSDictionary *info;
 }
 
 - (FlutterError*)onListenWithArguments:(id)arguments eventSink:(FlutterEventSink)eventSink {
-    NSLog(@"Adding Flutter Listener");
+    //NSLog(@"Adding Flutter Listener");
     sink = eventSink;
     return nil;
 }
 
 - (FlutterError*)onCancelWithArguments:(id)arguments {
-    NSLog(@"Removing Flutter Listener");
+    //NSLog(@"Removing Flutter Listener");
     if(sink!=nil){
         sink = nil;
     }
@@ -36,8 +36,6 @@ NSDictionary *info;
 
 @implementation AppDelegate
 
-#pragma mark watch session delegates
-
 // Event triggered when userInfo Rxd
 - (void)session:(nonnull WCSession *)session didReceiveUserInfo:(nonnull NSDictionary<NSString *, id> *)userInfo
 {
@@ -45,11 +43,6 @@ NSDictionary *info;
         [userInfoStreamHandler updateUserInfo:userInfo];
     }
 }
-
-
-
-
-#pragma mark watch session methods
 
 // Method used to enable the Watch session
 - (void)activateSession
@@ -60,7 +53,6 @@ NSDictionary *info;
 
 // create our eventChannel
 -(FlutterEventChannel *) activateChannel {
-    NSLog(@"activateChannel");
     userInfoStreamHandler = [[WTUserInfoHandler alloc] init];
     FlutterViewController* controller = (FlutterViewController*)self.window.rootViewController;
     FlutterEventChannel *eventChannel = [FlutterEventChannel eventChannelWithName:@"uk.spiralarm.watchtips/tipinfo/watchdata" binaryMessenger:controller];
@@ -83,6 +75,7 @@ NSDictionary *info;
     }
     return watchSession;
 }
+
 - (void)dealloc
 {
     if (watchSession != nil) {
@@ -105,6 +98,8 @@ NSDictionary *info;
         if([@"activateSession" isEqualToString:call.method]){
             [self activateSession];
             result(@"WatchTips Activated");
+        }else {
+            result(FlutterMethodNotImplemented);;
         }
         
     }];

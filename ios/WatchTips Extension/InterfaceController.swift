@@ -112,7 +112,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, WKCrownDele
         resetButtonFocus()
         currentSplit?.setBackgroundColor(UIColor(red: 0/255, green: 128/255, blue: 255/255, alpha: 1.0))
         focusButton = 1
-        presentController(withName: "SplitController", context: self)
+        //presentController(withName: "SplitController", context: self)
     }
     
     
@@ -120,7 +120,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, WKCrownDele
         resetButtonFocus()
         currentTip?.setBackgroundColor(UIColor(red: 0/255, green: 128/255, blue: 255/255, alpha: 1.0))
         focusButton = 2
-        presentController(withName: "TipController", context: self)
+        //presentController(withName: "TipController", context: self)
     }
     
     
