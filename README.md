@@ -7,9 +7,9 @@ Having now re-visited this I can now get a compiled blank watch app up and runni
 
 
 
-<img src="https://raw.githubusercontent.com/magnatronus/screenshots/watch.png" />
+<img src="https://raw.githubusercontent.com/magnatronus/flutter-watchtips/screenshots/watch.png" />
 
-<img src="https://raw.githubusercontent.com/magnatronus/screenshots/iphone.png" />
+<img src="https://raw.githubusercontent.com/magnatronus/flutter-watchtips/screenshots/iphone.png" />
 
 
 
