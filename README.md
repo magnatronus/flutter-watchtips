@@ -6,6 +6,7 @@ Having now re-visited this I can now get a compiled blank watch app up and runni
 [Titanium version is here](https://github.com/magnatronus/Watch-Tips)
 
 
+![Watch App](/screenshots/watch.png?raw=true "Watch App")
 
 <img src="https://raw.githubusercontent.com/magnatronus/flutter-watchtips/screenshots/watch.png" />
 
