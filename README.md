@@ -8,11 +8,6 @@ Having now re-visited this I can now get a compiled blank watch app up and runni
 
 ![Watch App](/screenshots/watch.png?raw=true "Watch App")
 
-<img src="https://raw.githubusercontent.com/magnatronus/flutter-watchtips/screenshots/watch.png" />
-
-<img src="https://raw.githubusercontent.com/magnatronus/flutter-watchtips/screenshots/iphone.png" />
-
-
 
 My plan is to:
 
