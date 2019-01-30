@@ -9,6 +9,12 @@ Having now re-visited this I can now get a compiled blank watch app up and runni
 ![Watch App](/screenshots/watch.png?raw=true "Watch App")
 
 
+## App Store Link
+Ths app is a *really simple* app and originally just created as a proof point.  But for anyone interested this is the [AppStore Link to Watch Tips](https://itunes.apple.com/us/app/watch-tips/id1205407902).
+
+
+## Plan
+
 My plan is to:
 
 - *1.0* Create a vanilla Flutter app (this initial commit)
