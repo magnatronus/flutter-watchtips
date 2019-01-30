@@ -19,6 +19,14 @@ My plan is to:
 - *2.0* Tidy up both the Flutter code and the iOS project and use it to submit the app into the App Store
 
 
+## Flutter Package Project
+From the results of this test project, I have started developing a Flutter Package to allow communication between a Flutter iOS app and a watch app. This should allow easier integration with some standard functionality, though it is still a pain ATM as after you add a Watch Kit target to the iOS project as Flutter run/build no longer works. This means all package testing and development then needs to be done via XCode. 
+
+I have got message working from an iOS app to the watch via the plugin, this can be seen working in a[video here](https://butterfly-mobile.uk/flutter-and-apple-watch).
+
+
+
+
 ## Generating a Distro build
 The only way, so far, I have found of creating a distro build is following this seqence.
 
