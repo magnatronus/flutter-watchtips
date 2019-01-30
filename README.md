@@ -5,6 +5,14 @@ Having now re-visited this I can now get a compiled blank watch app up and runni
 
 [Titanium version is here](https://github.com/magnatronus/Watch-Tips)
 
+
+
+<img src="https://raw.githubusercontent.com/magnatronus/screenshots/watch.png" />
+
+<img src="https://raw.githubusercontent.com/magnatronus/screenshots/iphone.png" />
+
+
+
 My plan is to:
 
 - *1.0* Create a vanilla Flutter app (this initial commit)
