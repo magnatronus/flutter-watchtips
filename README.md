@@ -37,10 +37,10 @@ I have got message working from an iOS app to the watch via the plugin, this can
 The only way, so far, I have found of creating a distro build is following this seqence.
 
 ### Set the Bundle ID
-BEFORE adding the Watchit app target set the final bundle ID, as the Watch app need to use the same prefix. If not you may need to update all references BEFORE creating the final Archive.
+BEFORE adding the Watch Kit app target set the final bundle ID, as the Watch app and associated extension needs to use the same prefix. If not you may need to update all references BEFORE creating the final Archive.
 
 ### Change ALL the Version and Build values
-This MUST for each target (in this case 3) to **$(FLUTTER_BUILD_NAME)**  and **$(FLUTTER_BUILD_NUMBER)** respectively, otherwise although the test runs work, the Archive will not unless the version numbers match.
+This **MUST** be done for each target (in this case 3), change them to **$(FLUTTER_BUILD_NAME)**  and **$(FLUTTER_BUILD_NUMBER)** respectively, otherwise although the test runs work, the Archive will not unless the version numbers match.
 
 ### Run the Flutter build first
 This will fail, but it generates the *correct shell scripts* to enable iOS to carry out the build (*flutter build ios --release*).
