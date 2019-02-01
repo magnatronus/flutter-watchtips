@@ -98,7 +98,9 @@ NSDictionary *info;
         if([@"activateSession" isEqualToString:call.method]){
             [self activateSession];
             result(@"WatchTips Activated");
-        }else {
+        }else if([@"preferredLanguages" isEqualToString:call.method]){
+            result([NSLocale preferredLanguages]);
+        } else {
             result(FlutterMethodNotImplemented);;
         }
         

@@ -14,7 +14,7 @@ class _HomeScreenState extends State<HomeScreen> {
       const EventChannel('uk.spiralarm.watchtips/tipinfo/watchdata');
   StreamSubscription tipSubscription;
 
-  final formatter = new NumberFormat("##0.00");
+  NumberFormat formatter = NumberFormat("##0.00");
   TextEditingController billTotalController =
       TextEditingController(text: "0.00");
   int tipPercent = 10, tipSplit = 1;
@@ -25,6 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
+    setupDeviceLocale();
     activateWatchConnection();
   }
 
@@ -185,5 +186,15 @@ class _HomeScreenState extends State<HomeScreen> {
         calculateBill(null);
       }
     });
+  }
+
+  /// Get the set device locale so we can correctly format the currency
+  setupDeviceLocale() async {
+    List locales = await platform.invokeMethod("preferredLanguages");
+    debugPrint("$locales");
+    if(locales.length> 0){
+      formatter = NumberFormat.simpleCurrency(locale: locales[0]);
+      setState(() {});
+    }
   }
 }
