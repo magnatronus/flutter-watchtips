@@ -91,7 +91,7 @@ NSDictionary *info;
                                             methodChannelWithName:@"uk.spiralarm.watchtips/tipinfo"
                                             binaryMessenger:controller];
     
-    //__weak typeof(self) weakSelf = self;
+    
     [tipinfoChannel setMethodCallHandler:^(FlutterMethodCall* call, FlutterResult result) {
         
         // activate Session

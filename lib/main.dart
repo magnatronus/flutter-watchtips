@@ -20,9 +20,9 @@ class TipCalculator extends StatelessWidget {
     final ThemeData base = ThemeData.light();
     return base.copyWith(
       primaryColor: appPrimaryColor,
-      scaffoldBackgroundColor: appPrimaryColor,
-      textSelectionColor: Colors.white,
-      cursorColor: Colors.white,
+      scaffoldBackgroundColor: appScaffoldColor,
+      textSelectionColor: appPrimaryTextColor,
+      cursorColor: appPrimaryTextColor,
       textTheme: base.textTheme.apply(
         bodyColor: appTextColor,
         displayColor: appTextColor,
@@ -33,6 +33,9 @@ class TipCalculator extends StatelessWidget {
       ),
       iconTheme: base.iconTheme.copyWith(color: appPrimaryTextColor),
       inputDecorationTheme: InputDecorationTheme(
+        //fillColor: Colors.white,
+        //filled: true,
+        
         labelStyle: TextStyle(color: appTextColor, fontSize: 25.0),
         enabledBorder: const OutlineInputBorder(
           borderSide: const BorderSide(color: appPrimaryTextColor, width: 2.0),
