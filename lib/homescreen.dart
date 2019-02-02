@@ -16,7 +16,7 @@ class _HomeScreenState extends State<HomeScreen> {
   StreamSubscription tipSubscription;
 
   NumberFormat formatter = NumberFormat("##0.00");
-  TextEditingController billTotalController = TextEditingController(); 
+  TextEditingController billTotalController = TextEditingController();
   int tipPercent = 10, tipSplit = 1;
   double billTotal = 0.0;
   double totalWithTip = 0.0;
@@ -65,7 +65,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     suffixIcon: IconButton(
                       onPressed: () {
                         FocusScope.of(context).requestFocus(new FocusNode());
-                        calculateBill(double.tryParse(billTotalController.text));
+                        calculateBill(
+                            double.tryParse(billTotalController.text));
                       },
                       icon: Icon(
                         Icons.keyboard_return,
@@ -73,7 +74,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     )),
               ),
-
               Padding(
                 padding: EdgeInsets.fromLTRB(5.0, 10.0, 5.0, 10.0),
                 child: Text(
@@ -81,7 +81,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   style: Theme.of(context).textTheme.body1,
                 ),
               ),
-
               Padding(
                 padding: EdgeInsets.fromLTRB(5.0, 10.0, 5.0, 10.0),
                 child: Text(
@@ -89,7 +88,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   style: Theme.of(context).textTheme.body1,
                 ),
               ),
-
               Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
@@ -101,7 +99,6 @@ class _HomeScreenState extends State<HomeScreen> {
                         style: Theme.of(context).primaryTextTheme.subhead,
                       ),
                     ),
-
                     IconButton(
                       onPressed: () {
                         if (tipPercent > 0) {
@@ -111,16 +108,14 @@ class _HomeScreenState extends State<HomeScreen> {
                       },
                       icon: Icon(Icons.remove),
                     ),
-
                     Container(
                       width: 40.0,
                       child: Text(
                         "$tipPercent%",
                         style: Theme.of(context).textTheme.subhead,
                         textAlign: TextAlign.center,
-                      ),  
-                    ),               
-  
+                      ),
+                    ),
                     IconButton(
                       onPressed: () {
                         if (tipPercent < 50) {
@@ -130,8 +125,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       },
                       icon: Icon(Icons.add),
                     ),
-
-
                   ]),
               Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -143,7 +136,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         textAlign: TextAlign.left,
                         style: Theme.of(context).primaryTextTheme.subhead,
                       ),
-                    ), 
+                    ),
                     IconButton(
                       onPressed: () {
                         if (tipSplit > 1) {
@@ -152,15 +145,15 @@ class _HomeScreenState extends State<HomeScreen> {
                         }
                       },
                       icon: Icon(Icons.remove),
-                    ),                    
+                    ),
                     Container(
-                      width: 40.0,               
+                      width: 40.0,
                       child: Text(
                         "$tipSplit",
                         style: Theme.of(context).textTheme.subhead,
                         textAlign: TextAlign.center,
-                      ),  
-                    ), 
+                      ),
+                    ),
                     IconButton(
                       onPressed: () {
                         if (tipSplit < 50) {
@@ -169,22 +162,16 @@ class _HomeScreenState extends State<HomeScreen> {
                         }
                       },
                       icon: Icon(Icons.add),
-                    ),                  
-
+                    ),
                   ]),
-
               Container(
                 decoration: BoxDecoration(
-                  border: Border.all(
-                    color: appPrimaryTextColor, 
-                    width: 2.0 
-                  ),
-                  borderRadius: BorderRadius.all( Radius.circular(5.0))
-                ),
+                    border: Border.all(color: appPrimaryTextColor, width: 2.0),
+                    borderRadius: BorderRadius.all(Radius.circular(5.0))),
                 padding: EdgeInsets.all(8.0),
                 child: Column(
                   children: <Widget>[
-                  Row(
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         Text(
@@ -196,7 +183,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           style: Theme.of(context).textTheme.subhead,
                         ),
                       ],
-                    ),                  
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
@@ -221,8 +208,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             "${formatter.format(totalEach)}",
                             style: Theme.of(context).textTheme.subhead,
                           ),
-                        ]
-                    ),
+                        ]),
                   ],
                 ),
               ),
@@ -266,10 +252,10 @@ class _HomeScreenState extends State<HomeScreen> {
   setupDeviceLocale() async {
     List locales = await platform.invokeMethod("preferredLanguages");
     debugPrint("$locales");
-    if(locales.length> 0){
+    if (locales.length > 0) {
       formatter = NumberFormat.simpleCurrency(locale: locales[0]);
     }
     billTotalController.text = formatter.format(0.0);
-    setState((){});
+    setState(() {});
   }
 }

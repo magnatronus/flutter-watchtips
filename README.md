@@ -33,6 +33,7 @@ I have got message working from an iOS app to the watch via the plugin, this can
 
 
 
+
 ## Generating a Distro build
 The only way, so far, I have found of creating a distro build is following this seqence.
 
@@ -54,6 +55,14 @@ This will fail, but it generates the *correct shell scripts* to enable iOS to ca
 
 
 ## Versions
+
+### 2.1
+- updated Watch and Phone UI
+- currency now defaults to the phone/ipad locale
+- package made universal, so it runs on iPad (no watch supoort)
+
+### 2.0 
+- first app store release
 
 ### 1.4 - Rough and Ready but Working!
 I have now managed to add the required code into the iOS project to allow it to communicate with Flutter and send data updates from the watch so they are reflected in the app.

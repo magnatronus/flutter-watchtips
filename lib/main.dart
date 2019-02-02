@@ -33,9 +33,6 @@ class TipCalculator extends StatelessWidget {
       ),
       iconTheme: base.iconTheme.copyWith(color: appPrimaryTextColor),
       inputDecorationTheme: InputDecorationTheme(
-        //fillColor: Colors.white,
-        //filled: true,
-        
         labelStyle: TextStyle(color: appTextColor, fontSize: 25.0),
         enabledBorder: const OutlineInputBorder(
           borderSide: const BorderSide(color: appPrimaryTextColor, width: 2.0),
