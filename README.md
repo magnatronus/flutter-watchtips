@@ -6,7 +6,7 @@ Having now re-visited this I can now get a compiled blank watch app up and runni
 [Titanium version is here](https://github.com/magnatronus/Watch-Tips)
 
 
-![Watch App](/screenshots/watch.png?raw=true "Watch App")
+![Watch App](/screenshots/watchtips.png?raw=true "Watch and Phone App")
 
 
 ## App Store Link
