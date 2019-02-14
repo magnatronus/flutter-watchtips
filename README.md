@@ -1,31 +1,32 @@
 # watchtips
 
 ## Update Version 2.2
-The Watch tips prject has been updated again, the interface has been tidied up and a seperate value for the *tip* cost has been added and displayed.
-I have also added a custom 'keypad' rather than using the standard one available for the platform, hopefully the app now looks a bit better than it did, UX/UI design is not my strong point. 
+The Watch tips project has been updated again, The interface has been tidied up and a seperate value for the *tip* cost has been added and displayed ( a requested update).
+I have also added a custom 'keypad' rather than using the standard one available for the platform, hopefully the app now looks a bit better than it did -  UX/UI design is not my strong point. 
 
-But the biggest update is that there is now also an Android version (without Watch support). Doing this has helped a lot as I can use the Flutter Android app for development purposes so that I now have Hot Relad back , developmernt is **good** again ....
+But the biggest update is that there is now also an Android version (without Watch support). Doing this has helped a lot as I can use the Flutter Android app for development purposes so that I now have Hot Reload back (development is **good** again ....)
 
-I still need to run/build (and fail) with the Flutter tools for iOS and finish with XCode, but general dev is know easier.
+For iOS, I still need to run/build (and fail) with the Flutter tools for iOS (this is required to generate the correct build scripts) and finish with XCode, but general dev is know easier.
 
+## Overview
+This was an originally experiment to see if  can use Flutter to build an iOS app with an accompanying watchOS app. My first attempts using the beta product were not successful so the idea was parked. Having now re-visited this I can now get a compiled blank watch app up and running with a Flutter app, so I will, in stages, try and re-create the WatchTips app using Flutter.
 
-
-This is an experiment to see if  can use Flutter to build an iOS app with an accompanying watchOS app. My first attempts using the beta product were not successful so the idea was parked.
-Having now re-visited this I can now get a compiled blank watch app up and running with a Flutter app, so I will, in stages, try and re-create the WatchTips app using Flutter.
-
-[Titanium version is here](https://github.com/magnatronus/Watch-Tips)
+If you interested in the original Titanium version is [here](https://github.com/magnatronus/Watch-Tips)
 
 
 ![Watch App](/screenshots/watchtips.png?raw=true "Watch and Phone App")
 
 
 ## App Store Link
-Ths app is a *really simple* app and originally just created as a proof point.  But for anyone interested this is the [AppStore Link to Watch Tips](https://itunes.apple.com/us/app/watch-tips/id1205407902).
+Ths app is a *really simple* app and originally just created as a proof point.  
+
+But for anyone interested here are the release links:
+
+- [AppStore Link to Watch Tips](https://itunes.apple.com/us/app/watch-tips/id1205407902).
+- [Playstore Link](https://play.google.com/store/apps/details?id=uk.spiralarm.tipcalculator).
 
 
 ## Plan
-
-My plan is to:
 
 - *1.0* Create a vanilla Flutter app (this initial commit)
 - *1.1* Add a blank watch project and get it working
@@ -33,6 +34,7 @@ My plan is to:
 - *1.3* Update the Flutter app to WatchTips
 - *1.4* See if I can bridge between the 2 app (as the Titanium version does)
 - *2.0* Tidy up both the Flutter code and the iOS project and use it to submit the app into the App Store
+- *2.x+* - updates and improvements 
 
 
 ## Flutter Package Project
