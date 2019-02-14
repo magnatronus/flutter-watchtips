@@ -1,8 +1,10 @@
 import 'dart:async';
+import 'dart:io' show Platform;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
-import 'colors.dart';
+import 'numberpad.dart';
+import 'widgets/scaleroute.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -11,14 +13,14 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   static const platform = const MethodChannel('uk.spiralarm.watchtips/tipinfo');
-  static const stream =
-      const EventChannel('uk.spiralarm.watchtips/tipinfo/watchdata');
+  static const stream = const EventChannel('uk.spiralarm.watchtips/tipinfo/watchdata');
   StreamSubscription tipSubscription;
 
   NumberFormat formatter = NumberFormat("##0.00");
   TextEditingController billTotalController = TextEditingController();
   int tipPercent = 10, tipSplit = 1;
   double billTotal = 0.0;
+  double tip = 0.0;
   double totalWithTip = 0.0;
   double totalEach = 0.0;
 
@@ -26,7 +28,9 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     setupDeviceLocale();
-    activateWatchConnection();
+    if(Platform.isIOS){
+      activateWatchConnection();
+    }
   }
 
   @override
@@ -43,178 +47,220 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         brightness: Brightness.light,
+        centerTitle: true,
         elevation: 0.0,
         title: Text(
           "Tip Calculator",
-          style: Theme.of(context).textTheme.headline,
+          style: Theme.of(context).primaryTextTheme.display1,
         ),
       ),
-      body: SingleChildScrollView(
-        child: Container(
-          margin: EdgeInsets.all(20.0),
-          padding: EdgeInsets.fromLTRB(10.0, 5.0, 10.0, 5.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              TextField(
-                controller: billTotalController,
-                keyboardType: TextInputType.numberWithOptions(decimal: true),
-                decoration: InputDecoration(
-                    labelText: "Bill Total",
-                    suffixIcon: IconButton(
-                      onPressed: () {
-                        FocusScope.of(context).requestFocus(new FocusNode());
-                        calculateBill(
-                            double.tryParse(billTotalController.text));
-                      },
-                      icon: Icon(
-                        Icons.keyboard_return,
-                        color: Theme.of(context).textTheme.body1.color,
-                      ),
-                    )),
-              ),
-              Padding(
-                padding: EdgeInsets.fromLTRB(5.0, 10.0, 5.0, 10.0),
-                child: Text(
-                  "Enter the total amount of your bill above and press the 'Return' icon.",
-                  style: Theme.of(context).textTheme.body1,
+      body: Container(
+        padding: EdgeInsets.all(20.0),
+        child: Column(
+          children: <Widget>[
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+
+                RaisedButton(
+                  elevation: 0.0,
+                  onPressed: () async {
+                    var value = await Navigator.push(
+                      context,
+                      ScaleRoute(widget:  NumberPad(
+                        billTotal,
+                        normalStyle: Theme.of(context).textTheme.display2,
+                        errorStyle: Theme.of(context).accentTextTheme.display2,
+                      )),
+                    );
+                    if(value != null){
+                      calculateBill(value);
+                    }
+                  },
+                  color: Colors.orange,
+                  child: Text(
+                    "Bill Total",
+                    style: Theme.of(context).primaryTextTheme.headline,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: new BorderRadius.circular(30.0),
+                  ),
                 ),
-              ),
-              Padding(
-                padding: EdgeInsets.fromLTRB(5.0, 10.0, 5.0, 10.0),
-                child: Text(
-                  "Alter Tip and Split Between to update the bill breakdown.",
-                  style: Theme.of(context).textTheme.body1,
+ 
+                Text(
+                  "${formatter.format(billTotal)}",
+                  style: Theme.of(context).primaryTextTheme.headline,
+                  textAlign: TextAlign.right,
                 ),
-              ),
-              Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Container(
-                      width: 110.0,
-                      child: Text(
-                        "Tip",
-                        textAlign: TextAlign.left,
-                        style: Theme.of(context).primaryTextTheme.subhead,
-                      ),
-                    ),
-                    IconButton(
-                      onPressed: () {
-                        if (tipPercent > 0) {
-                          tipPercent--;
-                          calculateBill(null);
-                        }
-                      },
-                      icon: Icon(Icons.remove),
-                    ),
-                    Container(
-                      width: 40.0,
-                      child: Text(
-                        "$tipPercent%",
-                        style: Theme.of(context).textTheme.subhead,
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                    IconButton(
-                      onPressed: () {
-                        if (tipPercent < 50) {
-                          tipPercent++;
-                          calculateBill(null);
-                        }
-                      },
-                      icon: Icon(Icons.add),
-                    ),
-                  ]),
-              Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Container(
-                      width: 110.0,
-                      child: Text(
-                        "Split Between",
-                        textAlign: TextAlign.left,
-                        style: Theme.of(context).primaryTextTheme.subhead,
-                      ),
-                    ),
-                    IconButton(
-                      onPressed: () {
-                        if (tipSplit > 1) {
-                          tipSplit--;
-                          calculateBill(null);
-                        }
-                      },
-                      icon: Icon(Icons.remove),
-                    ),
-                    Container(
-                      width: 40.0,
-                      child: Text(
-                        "$tipSplit",
-                        style: Theme.of(context).textTheme.subhead,
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                    IconButton(
-                      onPressed: () {
-                        if (tipSplit < 50) {
-                          tipSplit++;
-                          calculateBill(null);
-                        }
-                      },
-                      icon: Icon(Icons.add),
-                    ),
-                  ]),
-              Container(
-                decoration: BoxDecoration(
-                    border: Border.all(color: appPrimaryTextColor, width: 2.0),
-                    borderRadius: BorderRadius.all(Radius.circular(5.0))),
-                padding: EdgeInsets.all(8.0),
+              ],
+            ),
+
+            SizedBox(height: 20.0),
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text(
+                  "tip @ $tipPercent%",
+                  style: Theme.of(context).textTheme.headline,                  
+                ),
+                Text(
+                  "${formatter.format(tip)}",
+                  style: Theme.of(context).primaryTextTheme.headline,
+                  textAlign: TextAlign.right,
+                ),
+              ],
+            ),
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text(
+                  "Total with tip",
+                  style: Theme.of(context).textTheme.headline,                  
+                ),
+                Text(
+                  "${formatter.format(totalWithTip)}",
+                  style: Theme.of(context).primaryTextTheme.headline,
+                  textAlign: TextAlign.right,
+                ),
+              ],
+            ),
+
+            Container(
+              margin: EdgeInsets.all(15.0),
+              height: 1.0,
+              color: Theme.of(context).textTheme.headline.color
+            ),
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text(
+                  "Split between",
+                  style: Theme.of(context).textTheme.headline,                  
+                ),
+                Text(
+                  "$tipSplit",
+                  style: Theme.of(context).primaryTextTheme.headline,
+                  textAlign: TextAlign.right,
+                ),
+              ],
+            ),
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text(
+                  "Cost each",
+                  style: Theme.of(context).textTheme.headline,                  
+                ),
+                Text(
+                  "${formatter.format(totalEach)}",
+                  style: Theme.of(context).primaryTextTheme.headline,
+                  textAlign: TextAlign.right,
+                ),
+              ],
+            ),
+
+
+            Container(
+              margin: EdgeInsets.all(15.0),
+              height: 1.0,
+              color: Theme.of(context).textTheme.headline.color
+            ),
+
+            Expanded(
+              child: Center(
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Text(
-                          "Bill total",
-                          style: Theme.of(context).primaryTextTheme.subhead,
-                        ),
-                        Text(
-                          "${formatter.format(billTotal)}",
-                          style: Theme.of(context).textTheme.subhead,
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Text(
-                          "With tip",
-                          style: Theme.of(context).primaryTextTheme.subhead,
-                        ),
-                        Text(
-                          "${formatter.format(totalWithTip)}",
-                          style: Theme.of(context).textTheme.subhead,
-                        ),
-                      ],
-                    ),
-                    Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Text(
-                            "Cost each",
-                            style: Theme.of(context).primaryTextTheme.subhead,
-                          ),
-                          Text(
-                            "${formatter.format(totalEach)}",
-                            style: Theme.of(context).textTheme.subhead,
-                          ),
-                        ]),
+
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+               Text(
+                  "Tip Percentage",
+                  style: Theme.of(context).primaryTextTheme.title,
+                  textAlign: TextAlign.right,
+                ),
+
+                IconButton(
+                  iconSize: 50.0,
+                  onPressed: () {
+                    if (tipPercent > 0) {
+                      tipPercent--;
+                      calculateBill(null);
+                    }
+                  },
+                  icon: Icon(
+                    Icons.remove_circle,
+                  ),
+                ),
+
+                IconButton(  
+                  iconSize: 50.0,
+                onPressed: () {
+                  if (tipPercent < 100) {
+                    tipPercent++;
+                    calculateBill(null);
+                  }
+                },                         
+                icon: Icon(
+                  Icons.add_circle,
+                ),
+              ), 
+ 
+              ],
+            ),
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+                Text(
+                  "Split between",
+                  style: Theme.of(context).primaryTextTheme.title,
+                  textAlign: TextAlign.right,
+                ),
+                IconButton(
+                  iconSize: 50.0,
+                  onPressed: () {
+                    if (tipSplit > 1) {
+                      tipSplit--;
+                      calculateBill(null);
+                    }
+                  },
+                  icon: Icon(
+                    Icons.remove_circle,
+                  ),
+                ), 
+
+                IconButton(
+                  iconSize: 50.0,
+                  onPressed: () {
+                    if (tipSplit < 50) {
+                      tipSplit++;
+                      calculateBill(null);
+                    }
+                  },
+                  icon: Icon(
+                    Icons.add_circle,
+                  ),
+                ), 
+
+              ],
+            ),
+
                   ],
                 ),
               ),
-            ],
-          ),
+            ),
+
+          ],
         ),
+
       ),
     );
   }
@@ -225,7 +271,7 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {
       billTotal = total;
       billTotalController.text = "${formatter.format(billTotal)}";
-      double tip = (total / 100) * tipPercent;
+      tip = (total / 100) * tipPercent;
       totalWithTip = total + tip;
       totalEach = (totalWithTip / tipSplit);
     });
@@ -233,6 +279,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   /// Active and start the connection to the Watch App
   activateWatchConnection() async {
+
     // Start initial Session to allow watch and iOS to swap user data
     await platform.invokeMethod("activateSession");
 

@@ -1,15 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'homescreen.dart';
 import 'colors.dart';
 
-void main() => runApp(TipCalculator());
+/// Kick the Tyres and Light the Fires
+void main() {
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
+  runApp(TipCalculator());
+}
 
 class TipCalculator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'TipCalculator',
+      title: 'Tip Calculator',
       home: HomeScreen(),
       theme: _buildAppTheme(),
     );
@@ -20,18 +28,36 @@ class TipCalculator extends StatelessWidget {
     final ThemeData base = ThemeData.light();
     return base.copyWith(
       primaryColor: appPrimaryColor,
+      backgroundColor: Colors.yellow,
       scaffoldBackgroundColor: appScaffoldColor,
       textSelectionColor: appPrimaryTextColor,
       cursorColor: appPrimaryTextColor,
+
       textTheme: base.textTheme.apply(
         bodyColor: appTextColor,
         displayColor: appTextColor,
       ),
+
       primaryTextTheme: base.primaryTextTheme.apply(
         bodyColor: appPrimaryTextColor,
         displayColor: appPrimaryTextColor,
       ),
-      iconTheme: base.iconTheme.copyWith(color: appPrimaryTextColor),
+
+      accentTextTheme: base.primaryTextTheme.apply(
+        bodyColor: accentTextColor,
+        displayColor: accentTextColor,
+      ),
+
+      buttonTheme: base.buttonTheme.copyWith(
+        buttonColor: appButtonColor,
+        textTheme: ButtonTextTheme.primary
+      ),
+
+      iconTheme: base.iconTheme.copyWith(
+        color: appPrimaryButtonColor,
+      ),
+
+      /*
       inputDecorationTheme: InputDecorationTheme(
         labelStyle: TextStyle(color: appTextColor, fontSize: 25.0),
         enabledBorder: const OutlineInputBorder(
@@ -41,6 +67,8 @@ class TipCalculator extends StatelessWidget {
           borderSide: const BorderSide(color: appPrimaryTextColor, width: 2.0),
         ),
       ),
+      */
+
     );
   }
 }

@@ -1,5 +1,15 @@
 # watchtips
 
+## Update Version 2.2
+The Watch tips prject has been updated again, the interface has been tidied up and a seperate value for the *tip* cost has been added and displayed.
+I have also added a custom 'keypad' rather than using the standard one available for the platform, hopefully the app now looks a bit better than it did, UX/UI design is not my strong point. 
+
+But the biggest update is that there is now also an Android version (without Watch support). Doing this has helped a lot as I can use the Flutter Android app for development purposes so that I now have Hot Relad back , developmernt is **good** again ....
+
+I still need to run/build (and fail) with the Flutter tools for iOS and finish with XCode, but general dev is know easier.
+
+
+
 This is an experiment to see if  can use Flutter to build an iOS app with an accompanying watchOS app. My first attempts using the beta product were not successful so the idea was parked.
 Having now re-visited this I can now get a compiled blank watch app up and running with a Flutter app, so I will, in stages, try and re-create the WatchTips app using Flutter.
 
@@ -28,7 +38,7 @@ My plan is to:
 ## Flutter Package Project
 From the results of this test project, I have started developing a Flutter Package to allow communication between a Flutter iOS app and a watch app. This should allow easier integration with some standard functionality, though it is still a pain ATM as after you add a Watch Kit target to the iOS project as Flutter run/build no longer works. This means all package testing and development then needs to be done via XCode. 
 
-I have got message working from an iOS app to the watch via the plugin, this can be seen working in a[video here](https://butterfly-mobile.uk/flutter-and-apple-watch).
+I have got messaging working from an iOS app to the watch via the plugin, this can be seen working in a[video here](https://butterfly-mobile.uk/flutter-and-apple-watch).
 
 
 
