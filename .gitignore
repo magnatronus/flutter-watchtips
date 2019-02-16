@@ -10,6 +10,10 @@
 .history
 .svn/
 
+# Project Exclusions
+distro.p12
+**/android/key.properties
+
 # IntelliJ related
 *.iml
 *.ipr
