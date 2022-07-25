@@ -25,7 +25,7 @@ Ths app is a *really simple* app and originally just created as a proof point.
 
 But for anyone interested here are the release links:
 
-- [AppStore Link to Watch Tips](https://itunes.apple.com/us/app/watch-tips/id1205407902).
+- Old AppStore Link to Watch Tips (https://itunes.apple.com/us/app/watch-tips/id1205407902).
 - [Playstore Link](https://play.google.com/store/apps/details?id=uk.spiralarm.tipcalculator).
 
 
