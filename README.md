@@ -1,5 +1,8 @@
 # watchtips
 
+## Update Jul 2022
+As there has been no development on the codebase, and hence no app release for some time(this was really a POC). The app in the iOS app store has been withdrawn from sale by Apple.
+
 ## Update Version 2.2
 The Watch tips project has been updated again, The interface has been tidied up and a seperate value for the *tip* cost has been added and displayed ( a requested update).
 I have also added a custom 'keypad' rather than using the standard one available for the platform, hopefully the app now looks a bit better than it did -  UX/UI design is not my strong point. 
