@@ -1,5 +1,8 @@
 # watchtips
 
+## Update May 2024
+I  now have a companion demo app that has been broyght up to date and shows **simple** watchOS connectivity between Flutter and a watch app [here](https://github.com/magnatronus/basicwatch)
+
 ## Update Jul 2022
 As there has been no development on the codebase, and hence no app release for some time(this was really a POC). The app in the iOS app store has been withdrawn from sale by Apple.
 
